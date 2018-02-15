@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <title>Trailers</title>
+
+  <style>
+    .img-size{
+      height:400px;
+      width:285px
+    }
+  </style>
+
+</head>
+<body class="bg-dark">
+
+<nav class="navbar navbar-light bg-light justify-content-between">
+  <a class="navbar-brand">Trailers</a>
+</nav>
+
+<div id="root" class="container">
+  <div class="row mt-3 justify-content-between">
+    <div  v-for="trailer in trailers" class="col-12 col-md-4 mt-2">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top img-size" :src="trailer.image" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{trailer.name}}</h5>
+          <a :href="trailer.video" class="btn btn-primary">Trailer</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<script>
+    var app = new Vue({
+        el: '#root',
+        data: {
+            trailers: [],
+        },
+    })
+    axios.get('http://localhost:3000/api2').then(function (response) {
+        app.trailers = response.data
+    })
+</script>
+</body>
+</html>
